@@ -11,7 +11,7 @@ const MainNavBar = () => {
   return (
     <>
       <nav className="navbar">
-        <div className="navbar-brand">Group Project Portal</div>
+        <div className="navbar-brand">Group Project  Submission Portal</div>
         <ul className="navbar-links">
           <li><Link to="/">Home</Link></li>
           <li><Link to="/adminlogin">Admin</Link></li>

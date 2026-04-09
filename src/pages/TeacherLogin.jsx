@@ -14,7 +14,7 @@ const TeacherLogin = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      const response = await axios.post('http://localhost:2028/teacherapi/login', formData)
+      const response = await axios.post('http://localhost:2910/teacherapi/login', formData)
       if (response.status === 200) {
         sessionStorage.setItem('loggedInTeacher', JSON.stringify(response.data))
         loginAs('teacher')

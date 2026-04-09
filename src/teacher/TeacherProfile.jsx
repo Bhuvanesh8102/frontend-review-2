@@ -22,7 +22,7 @@ const TeacherProfile = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      const response = await axios.post('http://localhost:2028/teacherapi/updateprofile', formData)
+      const response = await axios.post('http://localhost:2910/teacherapi/updateprofile', formData)
       setMessage(response.data)
       setError('')
       sessionStorage.setItem('loggedInTeacher', JSON.stringify({ ...teacher, ...formData }))

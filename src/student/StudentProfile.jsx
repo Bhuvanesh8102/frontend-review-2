@@ -21,7 +21,7 @@ const StudentProfile = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      const response = await axios.post('http://localhost:2028/studentapi/updateprofile', formData)
+      const response = await axios.post('http://localhost:2910/studentapi/updateprofile', formData)
       setMessage(response.data)
       setError('')
       sessionStorage.setItem('loggedInStudent', JSON.stringify({ ...student, ...formData }))
