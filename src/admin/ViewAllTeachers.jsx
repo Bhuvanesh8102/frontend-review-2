@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import axios from 'axios'
+import apiClient from '../lib'
 import './Admin.css'
 
 const ViewAllTeachers = () => {
@@ -10,7 +10,7 @@ const ViewAllTeachers = () => {
 
   const fetchTeachers = async () => {
     try {
-      const response = await axios.get('/adminapi/viewallteachers')
+      const response = await apiClient.get('/adminapi/viewallteachers')
       setTeachers(response.data)
     } catch (err) {
       setError('Error fetching teachers')
@@ -23,7 +23,7 @@ const ViewAllTeachers = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:2910/adminapi/deleteteacher/${id}`)
+      await axios.delete(`/adminapi/deleteteacher/${id}`)
       setMessage('Teacher deleted successfully')
       setError('')
       fetchTeachers()

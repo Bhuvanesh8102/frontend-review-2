@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import axios from 'axios'
+import apiClient from '../lib'
 import './Student.css'
 
 const ProjectGroups = () => {
@@ -56,8 +56,8 @@ const ProjectGroups = () => {
 
   const fetchMembers = async (groupId) => {
     try {
-      const response = await axios.get(
-        'http://localhost:2910/studentapi/viewmembersbygroup',
+      const response = await apiClient.get(
+        '/studentapi/viewmembersbygroup',
         { params: { groupId } }
       )
       setMembers(response.data)

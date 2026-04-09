@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import axios from 'axios'
+import apiClient from '../lib'
 import './Admin.css'
 
 const ViewAllSubjects = () => {
@@ -10,7 +10,7 @@ const ViewAllSubjects = () => {
 
   const fetchSubjects = async () => {
     try {
-      const response = await axios.get('/adminapi/viewallsubjects')
+      const response = await apiClient.get('/adminapi/viewallsubjects')
       setSubjects(response.data)
     } catch (err) {
       setError('Error fetching subjects')
@@ -23,7 +23,7 @@ const ViewAllSubjects = () => {
 
   const handleDelete = async (coursecode) => {
     try {
-      await axios.delete(`http://localhost:2910/adminapi/deletesubject?coursecode=${coursecode}`)
+      await apiClient.delete(`/adminapi/deletesubject?coursecode=${coursecode}`)
       setMessage('Subject Deleted Successfully')
       setError('')
       fetchSubjects()

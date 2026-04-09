@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import axios from 'axios'
+import apiClient from '../lib'
 import './Admin.css'
 
 const AddSubject = () => {
@@ -21,7 +21,7 @@ const AddSubject = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      const response = await axios.post('http://localhost:2910/adminapi/addsubject', formData)
+      const response = await apiClient.post('/adminapi/addsubject', formData)
       setMessage(response.data)
       setError('')
       setFormData({ coursecode: '', subjectname: '', department: '', semester: '', credits: '', description: '' })

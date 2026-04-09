@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
+import apiClient from '../lib'
 import './Teacher.css'
 
 const ViewSubjects = () => {
@@ -14,7 +14,7 @@ const ViewSubjects = () => {
   useEffect(() => {
     const fetchSubjects = async () => {
       try {
-        const response = await axios.get(`/teacherapi/viewsubjectbydepartment?department=${teacher?.department}`)
+        const response = await apiClient.get(`/teacherapi/viewsubjectbydepartment?department=${teacher?.department}`)
         setSubjects(response.data)
       } catch (err) {
         setError('Error fetching subjects')

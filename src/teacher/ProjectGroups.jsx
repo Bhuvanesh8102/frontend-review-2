@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import axios from 'axios'
+import apiClient from '../lib'
 import './Teacher.css'
 
 const ProjectGroups = () => {
@@ -19,7 +19,7 @@ const ProjectGroups = () => {
 
   const fetchGroups = async () => {
     try {
-      const response = await axios.get(`/teacherapi/viewgroupsbyproject?projectId=${projectId}`)
+      const response = await apiClient.get(`/teacherapi/viewgroupsbyproject?projectId=${projectId}`)
       const groupsData = Array.isArray(response.data) ? response.data : []
       setGroups(groupsData)
     } catch (err) {
@@ -33,7 +33,7 @@ const ProjectGroups = () => {
 
   const handleCreateGroup = async () => {
     try {
-      const response = await axios.post(`/teacherapi/creategroup?projectId=${projectId}&maxMembers=${maxMembers}`)
+      const response = await apiClient.post(`/teacherapi/creategroup?projectId=${projectId}&maxMembers=${maxMembers}`)
       setMessage(response.data)
       setError('')
       fetchGroups()
@@ -44,7 +44,7 @@ const ProjectGroups = () => {
 
   const handleDeleteGroup = async (groupId) => {
     try {
-      await axios.delete(`/teacherapi/deletegroup?groupId=${groupId}`)
+      await apiClient.delete(`/teacherapi/deletegroup?groupId=${groupId}`)
       setMessage('Group Deleted Successfully')
       setError('')
       fetchGroups()
@@ -58,7 +58,7 @@ const ProjectGroups = () => {
     setLoadingMembers(true)
     setErrorMembers('')
     try {
-      const response = await axios.get('/teacherapi/viewmembersbygroup', {
+      const response = await apiClient.get('/teacherapi/viewmembersbygroup', {
         params: { groupId }
       })
       setMembers(response.data)
@@ -71,7 +71,7 @@ const ProjectGroups = () => {
 
   const handleAssignLeader = async (groupId, studentId) => {
     try {
-      const response = await axios.post(`/teacherapi/assignleader?groupId=${groupId}&studentId=${studentId}`)
+      const response = await apiClient.post(`/teacherapi/assignleader?groupId=${groupId}&studentId=${studentId}`)
       setMessage(response.data)
       setError('')
       fetchGroups()

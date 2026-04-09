@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import axios from 'axios'
+import apiClient from '../lib'
 import './Teacher.css'
 
 const SubjectProjects = () => {
@@ -21,7 +21,7 @@ const SubjectProjects = () => {
 
   const fetchProjects = async () => {
     try {
-      const response = await axios.get(`/teacherapi/viewprojectsbysubject?coursecode=${coursecode}`)
+      const response = await apiClient.get(`/teacherapi/viewprojectsbysubject?coursecode=${coursecode}`)
       setProjects(response.data)
     } catch (err) {
       setError('Error fetching projects')
@@ -39,7 +39,7 @@ const SubjectProjects = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      const response = await axios.post(
+      const response = await apiClient.post(
         `/teacherapi/addproject?coursecode=${coursecode}&teacherId=${teacher?.id}`,
         formData
       )
@@ -54,7 +54,7 @@ const SubjectProjects = () => {
 
   const handleDelete = async (projectId) => {
     try {
-      await axios.delete(`/teacherapi/deleteproject?projectId=${projectId}`)
+      await apiClient.delete(`/teacherapi/deleteproject?projectId=${projectId}`)
       setMessage('Project Deleted Successfully')
       fetchProjects()
     } catch (err) {

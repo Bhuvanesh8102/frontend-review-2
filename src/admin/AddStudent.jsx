@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import axios from 'axios'
+import apiClient from '../lib'
 import './Admin.css'
 
 const AddStudent = () => {
@@ -17,7 +17,7 @@ const AddStudent = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      const response = await axios.post('/adminapi/addstudent', formData)
+      const response = await apiClient.post('/adminapi/addstudent', formData)
       setMessage(response.data)
       setError('')
       setFormData({ name: '', gender: '', email: '', contact: '', username: '', password: '', department: '', bloodgroup: '' })

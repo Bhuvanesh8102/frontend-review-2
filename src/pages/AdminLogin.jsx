@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import axios from 'axios'
+import apiClient from '../lib'
 import { useNavigate } from 'react-router-dom'
 import './Style.css'
 import { useAuth } from '../context/AuthContext'
@@ -14,7 +14,7 @@ const AdminLogin = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      const response = await axios.post('http://localhost:2910/adminapi/login', formData)
+      const response = await apiClient.post('/adminapi/login', formData)
       if (response.status === 200) {
         sessionStorage.setItem('loggedInAdmin', JSON.stringify(response.data))
         loginAs('admin')

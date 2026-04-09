@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import axios from 'axios'
+import apiClient from '../lib'
 import './Teacher.css'
 
 const TeacherProfile = () => {
@@ -22,7 +22,7 @@ const TeacherProfile = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      const response = await axios.post('http://localhost:2910/teacherapi/updateprofile', formData)
+      const response = await apiClient.post('/teacherapi/updateprofile', formData)
       setMessage(response.data)
       setError('')
       sessionStorage.setItem('loggedInTeacher', JSON.stringify({ ...teacher, ...formData }))

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import axios from 'axios'
+import apiClient from '../lib'
 import './Student.css'
 
 const SubjectProjects = () => {
@@ -14,7 +14,7 @@ const SubjectProjects = () => {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const response = await axios.get(`/studentapi/viewprojectsbysubject?coursecode=${coursecode}`)
+        const response = await apiClient.get(`/studentapi/viewprojectsbysubject?coursecode=${coursecode}`)
         setProjects(response.data)
       } catch (err) {
         setError('Error fetching projects')
